@@ -1,0 +1,16 @@
+export const genreOptions = [
+  "2D",
+  "3D",
+  "Action",
+  "Adventure",
+  "Arcade",
+  "Cozy",
+  "Fantasy",
+  "Parkour",
+  "Platformer",
+  "Puzzle",
+  "RPG",
+  "Shooter",
+  "Simulation",
+  "Strategy",
+];
