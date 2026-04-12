@@ -1,14 +1,25 @@
-import Navbar from "./components/Navbar"
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+
 export default function App() {
-	return (
-		<div className="min-h-screen bg-slate-900">
-			<Navbar />
-			<main className="mx-auto max-w-7xl px-6 py-8 md:px-8">
-				<h1 className="text-3xl font-bold text-white">Welcome to the Game Showcase</h1>
-				<p className="text-slate-400">
-					Discover the latest games created by HCMUT students.
-				</p>
-			</main>
-		</div>
-	)
+  return (
+    <div className="min-h-screen bg-slate-950 text-white">
+      <Navbar />
+      <Hero />
+
+      <section
+        id="games"
+        className="mx-auto max-w-7xl px-6 py-20 text-slate-300 md:px-8"
+      >
+        Games section coming next
+      </section>
+
+      <section
+        id="upload"
+        className="mx-auto max-w-7xl px-6 py-20 text-slate-300 md:px-8"
+      >
+        Upload section coming next
+      </section>
+    </div>
+  );
 }

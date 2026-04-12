@@ -1,51 +1,55 @@
-import { Gamepad2 } from "lucide-react";
-
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-8">
+    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white">
+      <div className="mx-auto grid max-w-7xl grid-cols-[auto_1fr_auto] items-center px-6 py-4 md:px-8">
         <a href="#home" className="flex items-center gap-3">
-          <div className="rounded-2xl bg-blue-500 p-2 text-white shadow-lg shadow-blue-500/25">
-            <Gamepad2 className="h-5 w-5" />
+          <div className="rounded-xl bg-sky-100 p-2">
+            <img
+              src="/logo.png"
+              alt="GameDev Club logo"
+              className="h-8 w-8 object-contain"
+            />
           </div>
 
           <div>
-            <div className="text-sm font-semibold text-white md:text-base">
-              HCMUT Game Dev Club
+            <div className="pixel-font text-[10px] leading-4 text-slate-900 md:text-xs">
+              HCMUT GameDev Club
             </div>
-            <div className="text-xs text-slate-400">
+            <div className="text-xs text-slate-500">
               Student Game Showcase
             </div>
           </div>
         </a>
 
-        <nav className="hidden items-center gap-2 md:flex">
+        <nav className="hidden items-center justify-center gap-2 md:flex">
           <a
             href="#home"
-            className="rounded-2xl px-4 py-2 text-sm text-slate-200 transition hover:bg-white/10"
+            className="rounded-lg px-4 py-2 text-sm text-slate-700 transition hover:bg-sky-50"
           >
             Home
           </a>
           <a
             href="#games"
-            className="rounded-2xl px-4 py-2 text-sm text-slate-200 transition hover:bg-white/10"
+            className="rounded-lg px-4 py-2 text-sm text-slate-700 transition hover:bg-sky-50"
           >
             Games
           </a>
           <a
             href="#upload"
-            className="rounded-2xl px-4 py-2 text-sm text-slate-200 transition hover:bg-white/10"
+            className="rounded-lg px-4 py-2 text-sm text-slate-700 transition hover:bg-sky-50"
           >
             Upload
           </a>
         </nav>
 
-        <a
-          href="#games"
-          className="rounded-2xl bg-blue-500 px-4 py-2 text-sm font-medium text-white shadow-lg shadow-blue-500/25 transition hover:scale-[1.02] hover:bg-blue-400"
-        >
-          Explore
-        </a>
+        <div className="flex justify-end">
+          <a
+            href="#games"
+            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
+          >
+            Explore
+          </a>
+        </div>
       </div>
     </header>
   );
