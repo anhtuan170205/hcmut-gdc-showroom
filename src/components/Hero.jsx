@@ -1,37 +1,9 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-
-const featuredGames = [
-  {
-    title: "Back To Throne",
-    description:
-      "A fantasy action platformer where players overcome traps and obstacles on the journey back to the throne.",
-    image:
-      "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80",
-    team: "Team Horizon",
-    genres: ["Action", "Platformer", "3D"],
-  },
-  {
-    title: "Dumb Jumper",
-    description:
-      "A lighthearted platforming game focused on timing, movement, and playful level design.",
-    image:
-      "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80",
-    team: "Team Pixel",
-    genres: ["Arcade", "2D", "Platformer"],
-  },
-  {
-    title: "Pixel Harvest",
-    description:
-      "A cozy pixel-art adventure about farming, exploration, and relaxing village life.",
-    image:
-      "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=1200&q=80",
-    team: "Team Bloom",
-    genres: ["Cozy", "Adventure", "Pixel"],
-  },
-];
+import { mockGames } from "../data/mockGames";
 
 export default function Hero() {
+  const featuredGames = mockGames.filter((game) => game.featured);
   const [currentIndex, setCurrentIndex] = useState(0);
   const currentGame = featuredGames[currentIndex];
 
@@ -89,7 +61,7 @@ export default function Hero() {
 
         <div className="grid gap-6 lg:grid-cols-[1.35fr_0.65fr]">
           <article className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-            <div className="aspect-[16/9] w-full overflow-hidden bg-slate-100">
+            <div className="aspect-video w-full overflow-hidden bg-slate-100">
               <img
                 src={currentGame.image}
                 alt={currentGame.title}
@@ -130,7 +102,7 @@ export default function Hero() {
           <div className="grid gap-4">
             {featuredGames.map((game, index) => (
               <button
-                key={game.title}
+                key={game.id}
                 onClick={() => setCurrentIndex(index)}
                 className={`overflow-hidden rounded-2xl border text-left transition ${
                   index === currentIndex
@@ -156,9 +128,7 @@ export default function Hero() {
                       {game.description}
                     </div>
 
-                    <div className="text-xs text-slate-500">
-                      {game.team}
-                    </div>
+                    <div className="text-xs text-slate-500">{game.team}</div>
                   </div>
                 </div>
               </button>
