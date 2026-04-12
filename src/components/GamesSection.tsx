@@ -1,13 +1,13 @@
 import { useMemo, useState } from "react";
 import GameCard from "./GameCard";
 import { mockGames } from "../data/mockGames";
+import { genreOptions } from "../data/genres";
 
 export default function GamesSection() {
   const [selectedGenre, setSelectedGenre] = useState("All");
 
   const genres = useMemo(() => {
-    const allGenres = mockGames.flatMap((game) => game.genres);
-    return ["All", ...Array.from(new Set(allGenres))];
+    return ["All", ...genreOptions];
   }, []);
 
   const filteredGames = useMemo(() => {
