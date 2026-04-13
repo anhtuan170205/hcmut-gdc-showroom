@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { genreOptions } from "../data/genres";
+import { createGame } from "../services/games";
 
 type UploadFormData = {
   gameTitle: string;
@@ -8,6 +9,10 @@ type UploadFormData = {
   description: string;
   buildLink: string;
   imageLink: string;
+};
+
+type UploadSectionProps = {
+  onGameSubmitted: () => Promise<void> | void;
 };
 
 const initialFormData: UploadFormData = {
@@ -19,8 +24,19 @@ const initialFormData: UploadFormData = {
   imageLink: "",
 };
 
-export default function UploadSection() {
+function withTimeout<T>(promise: Promise<T>, ms = 8000): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) =>
+      setTimeout(() => reject(new Error("Request timed out after 8 seconds")), ms)
+    ),
+  ]);
+}
+
+export default function UploadSection({ onGameSubmitted }: UploadSectionProps) {
   const [formData, setFormData] = useState<UploadFormData>(initialFormData);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [message, setMessage] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -46,14 +62,41 @@ export default function UploadSection() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setMessage("");
 
-    console.log("Submitted game:", formData);
+    console.log("submit started", formData);
 
-    // later you can send formData to backend here
+    try {
+      const result = await withTimeout(
+        createGame({
+          title: formData.gameTitle,
+          team: formData.teamName,
+          genres: formData.genres,
+          description: formData.description,
+          image: formData.imageLink,
+          itchUrl: formData.buildLink,
+          platforms: ["Windows"],
+          featured: false,
+        }),
+        8000
+      );
 
-    setFormData(initialFormData);
+      console.log("submit success", result);
+      await onGameSubmitted?.();
+      setFormData(initialFormData);
+      setMessage("Game submitted successfully.");
+    } catch (error) {
+      console.error("submit failed", error);
+      setMessage(
+        error instanceof Error ? error.message : "Failed to submit game."
+      );
+    } finally {
+      console.log("submit finished");
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -121,7 +164,7 @@ export default function UploadSection() {
               </label>
 
               <div className="flex flex-wrap gap-3">
-                {genreOptions.map((genre) => {
+                {genreOptions.map((genre: string) => {
                   const isActive = formData.genres.includes(genre);
 
                   return (
@@ -202,11 +245,16 @@ export default function UploadSection() {
             <div className="pt-2">
               <button
                 type="submit"
-                className="rounded-full bg-blue-600 px-6 py-3 text-sm font-medium text-white transition hover:bg-blue-700"
+                disabled={isSubmitting}
+                className="rounded-full bg-blue-600 px-6 py-3 text-sm font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
               >
-                Submit Game
+                {isSubmitting ? "Submitting..." : "Submit Game"}
               </button>
             </div>
+
+            {message ? (
+              <p className="text-sm text-slate-600">{message}</p>
+            ) : null}
           </form>
         </div>
       </div>
