@@ -186,8 +186,8 @@ export default function AdminPage() {
 
   if (!authChecked) {
     return (
-      <div className="min-h-screen bg-slate-950 px-6 py-16 text-white">
-        <div className="mx-auto max-w-3xl rounded-3xl border border-slate-800 bg-slate-900 p-6">
+      <div className="min-h-screen bg-white px-6 py-16 text-slate-900">
+        <div className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
           Checking authentication...
         </div>
       </div>
@@ -196,10 +196,14 @@ export default function AdminPage() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-slate-950 px-6 py-16 text-white">
-        <div className="mx-auto max-w-3xl rounded-3xl border border-slate-800 bg-slate-900 p-6">
+      <div className="min-h-screen bg-white px-6 py-16 text-slate-900">
+        <div className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-sky-100 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-blue-700">
+            Admin Dashboard
+          </div>
+
           <h1 className="mb-3 text-2xl font-semibold">Admin Login</h1>
-          <p className="mb-6 text-slate-300">
+          <p className="mb-6 text-slate-600">
             Sign in with your admin account to review submissions and manage
             games.
           </p>
@@ -217,33 +221,33 @@ export default function AdminPage() {
 
   if (user && !ADMIN_UID) {
     return (
-      <div className="min-h-screen bg-slate-950 px-6 py-16 text-white">
-        <div className="mx-auto max-w-3xl rounded-3xl border border-slate-800 bg-slate-900 p-6">
+      <div className="min-h-screen bg-white px-6 py-16 text-slate-900">
+        <div className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
           <h1 className="mb-3 text-2xl font-semibold">Set up admin UID</h1>
-          <p className="mb-4 text-slate-300">
+          <p className="mb-4 text-slate-600">
             You are signed in successfully. Copy this UID into your{" "}
             <code>.env</code> file as <code>VITE_ADMIN_UID</code>.
           </p>
 
-          <div className="mb-6 rounded-2xl border border-slate-700 bg-slate-950 p-4">
-            <p className="mb-2 text-sm text-slate-400">Your Firebase UID</p>
-            <code className="break-all text-sm text-white">{user.uid}</code>
+          <div className="mb-6 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <p className="mb-2 text-sm text-slate-500">Your Firebase UID</p>
+            <code className="break-all text-sm text-slate-900">{user.uid}</code>
           </div>
 
-          <div className="mb-6 rounded-2xl border border-slate-700 bg-slate-950 p-4">
-            <p className="mb-2 text-sm text-slate-400">Put this in .env</p>
-            <code className="break-all text-sm text-white">
+          <div className="mb-6 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <p className="mb-2 text-sm text-slate-500">Put this in .env</p>
+            <code className="break-all text-sm text-slate-900">
               VITE_ADMIN_UID={user.uid}
             </code>
           </div>
 
-          <p className="mb-6 text-sm text-slate-400">
+          <p className="mb-6 text-sm text-slate-500">
             After saving the file, restart your dev server.
           </p>
 
           <button
             onClick={logoutAdmin}
-            className="rounded-full bg-slate-800 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-700"
+            className="rounded-full bg-slate-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-700"
           >
             Sign out
           </button>
@@ -254,16 +258,16 @@ export default function AdminPage() {
 
   if (!isAdmin) {
     return (
-      <div className="min-h-screen bg-slate-950 px-6 py-16 text-white">
-        <div className="mx-auto max-w-3xl rounded-3xl border border-slate-800 bg-slate-900 p-6">
+      <div className="min-h-screen bg-white px-6 py-16 text-slate-900">
+        <div className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
           <h1 className="mb-3 text-2xl font-semibold">Access denied</h1>
-          <p className="mb-6 text-slate-300">
+          <p className="mb-6 text-slate-600">
             You are signed in, but this account is not the admin account.
           </p>
 
           <button
             onClick={logoutAdmin}
-            className="rounded-full bg-slate-700 px-6 py-3 text-sm font-medium text-white transition hover:bg-slate-600"
+            className="rounded-full bg-slate-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-slate-700"
           >
             Sign out
           </button>
@@ -273,267 +277,80 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
-      <div className="mx-auto max-w-7xl px-6 py-10 md:px-8">
-        <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div>
-            <div className="mb-2 inline-flex rounded-full bg-sky-100 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-blue-700">
-              Admin Dashboard
+    <div className="min-h-screen bg-white text-slate-900">
+      <section className="border-b border-slate-200 bg-white">
+        <div className="mx-auto max-w-7xl px-6 py-12 md:px-8 md:py-16">
+          <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-2 rounded-full bg-sky-100 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-blue-700">
+                Admin Dashboard
+              </div>
+
+              <h1 className="pixel-font text-lg leading-8 text-slate-900 md:text-2xl md:leading-[2.8rem]">
+                Manage submissions and games.
+              </h1>
+
+              <p className="max-w-2xl text-base leading-8 text-slate-600">
+                Review pending submissions, approve or reject them, and update
+                published games.
+              </p>
             </div>
-            <h1 className="text-3xl font-semibold text-white">
-              Manage submissions and games
-            </h1>
-            <p className="mt-2 text-slate-300">
-              Review pending submissions, approve or reject them, and edit
-              published games.
-            </p>
-          </div>
 
-          <button
-            onClick={logoutAdmin}
-            className="rounded-full bg-slate-800 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-700"
-          >
-            Sign out
-          </button>
-        </div>
-
-        {message ? (
-          <div className="mb-6 rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm text-slate-200">
-            {message}
-          </div>
-        ) : null}
-
-        <section className="mb-10">
-          <div className="mb-4">
-            <h2 className="text-2xl font-semibold">Pending submissions</h2>
-            <p className="mt-1 text-slate-400">
-              These are not public yet. Approving will add them to the games
-              collection.
-            </p>
-          </div>
-
-          {isLoadingSubmissions ? (
-            <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 text-slate-300">
-              Loading submissions...
-            </div>
-          ) : submissions.length === 0 ? (
-            <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 text-slate-300">
-              No pending submissions.
-            </div>
-          ) : (
-            <div className="grid gap-6">
-              {submissions.map((submission) => (
-                <article
-                  key={submission.id}
-                  className="rounded-3xl border border-slate-800 bg-slate-900 p-6"
-                >
-                  <div>
-                    <div className="mb-3 flex flex-wrap items-center gap-2">
-                      <h3 className="text-xl font-semibold">
-                        {submission.title || "Untitled game"}
-                      </h3>
-                      <span className="rounded-full bg-amber-500/15 px-3 py-1 text-xs font-medium text-amber-300">
-                        Pending
-                      </span>
-                    </div>
-
-                    <p className="mb-2 text-sm text-slate-400">
-                      Team: {submission.team || "Unknown"}
-                    </p>
-
-                    {submission.genres?.length ? (
-                      <div className="mb-3 flex flex-wrap gap-2">
-                        {submission.genres.map((genre) => (
-                          <span
-                            key={genre}
-                            className="rounded-full bg-sky-100 px-3 py-1 text-xs font-medium text-blue-700"
-                          >
-                            {genre}
-                          </span>
-                        ))}
-                      </div>
-                    ) : null}
-
-                    <p className="mb-4 text-sm leading-7 text-slate-300">
-                      {submission.description || "No description"}
-                    </p>
-
-                    {submission.itchUrl ? (
-                      <p className="mb-4 text-sm text-slate-300">
-                        Game link:{" "}
-                        <a
-                          href={submission.itchUrl}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="break-all text-blue-400 hover:text-blue-300"
-                        >
-                          {submission.itchUrl}
-                        </a>
-                      </p>
-                    ) : null}
-
-                    <div className="flex flex-wrap gap-3">
-                      <button
-                        onClick={() => handleApprove(submission)}
-                        className="rounded-full bg-emerald-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-emerald-700"
-                      >
-                        Approve
-                      </button>
-
-                      <button
-                        onClick={() => handleReject(submission.id)}
-                        className="rounded-full bg-rose-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-rose-700"
-                      >
-                        Reject
-                      </button>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          )}
-        </section>
-
-        <section className="mb-10">
-          <div className="mb-4">
-            <h2 className="text-2xl font-semibold">Edit published game</h2>
-            <p className="mt-1 text-slate-400">
-              Select a published game below to update its info.
-            </p>
-          </div>
-
-          {editingGameId ? (
-            <form
-              onSubmit={handleSaveEdit}
-              className="rounded-3xl border border-slate-800 bg-slate-900 p-6"
+            <button
+              onClick={logoutAdmin}
+              className="rounded-full bg-slate-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-700"
             >
-              <div className="grid gap-6 md:grid-cols-2">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-slate-200">
-                    Title
-                  </label>
-                  <input
-                    name="title"
-                    value={editForm.title}
-                    onChange={handleEditChange}
-                    className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-blue-500"
-                    required
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-slate-200">
-                    Team
-                  </label>
-                  <input
-                    name="team"
-                    value={editForm.team}
-                    onChange={handleEditChange}
-                    className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-blue-500"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="mt-6 space-y-2">
-                <label className="text-sm font-medium text-slate-200">
-                  Genres
-                </label>
-                <input
-                  name="genres"
-                  value={editForm.genres}
-                  onChange={handleEditChange}
-                  placeholder="Action, Puzzle, Horror"
-                  className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-blue-500"
-                />
-              </div>
-
-              <div className="mt-6 space-y-2">
-                <label className="text-sm font-medium text-slate-200">
-                  Description
-                </label>
-                <textarea
-                  name="description"
-                  rows={5}
-                  value={editForm.description}
-                  onChange={handleEditChange}
-                  className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-blue-500"
-                  required
-                />
-              </div>
-
-              <div className="mt-6 space-y-2">
-                <label className="text-sm font-medium text-slate-200">
-                  Game link
-                </label>
-                <input
-                  name="itchUrl"
-                  value={editForm.itchUrl}
-                  onChange={handleEditChange}
-                  className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-blue-500"
-                />
-              </div>
-
-              <div className="mt-6 flex flex-wrap gap-3">
-                <button
-                  type="submit"
-                  className="rounded-full bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700"
-                >
-                  Save changes
-                </button>
-
-                <button
-                  type="button"
-                  onClick={cancelEdit}
-                  className="rounded-full bg-slate-800 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-700"
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          ) : (
-            <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 text-slate-300">
-              No game selected for editing.
-            </div>
-          )}
-        </section>
-
-        <section>
-          <div className="mb-4">
-            <h2 className="text-2xl font-semibold">Published games</h2>
-            <p className="mt-1 text-slate-400">
-              These are the games currently shown on the public site.
-            </p>
+              Sign out
+            </button>
           </div>
 
-          {isLoadingGames ? (
-            <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 text-slate-300">
-              Loading games...
+          {message ? (
+            <div className="mb-6 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
+              {message}
             </div>
-          ) : games.length === 0 ? (
-            <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 text-slate-300">
-              No published games yet.
-            </div>
-          ) : (
-            <div className="grid gap-6">
-              {games.map((game) => (
-                <article
-                  key={game.id}
-                  className="rounded-3xl border border-slate-800 bg-slate-900 p-6"
-                >
-                  <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-start">
-                    <div>
-                      <h3 className="mb-2 text-xl font-semibold">
-                        {game.title || "Untitled game"}
-                      </h3>
+          ) : null}
 
-                      <p className="mb-2 text-sm text-slate-400">
-                        Team: {game.team || "Unknown"}
+          <section className="mb-10">
+            <div className="mb-4">
+              <h2 className="text-2xl font-semibold">Pending submissions</h2>
+              <p className="mt-1 text-slate-500">
+                These are not public yet. Approving will add them to the games
+                collection.
+              </p>
+            </div>
+
+            {isLoadingSubmissions ? (
+              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm text-slate-600">
+                Loading submissions...
+              </div>
+            ) : submissions.length === 0 ? (
+              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm text-slate-600">
+                No pending submissions.
+              </div>
+            ) : (
+              <div className="grid gap-6">
+                {submissions.map((submission) => (
+                  <article
+                    key={submission.id}
+                    className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
+                  >
+                    <div>
+                      <div className="mb-3 flex flex-wrap items-center gap-2">
+                        <h3 className="text-xl font-semibold">
+                          {submission.title || "Untitled game"}
+                        </h3>
+                        <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-medium text-amber-700">
+                          Pending
+                        </span>
+                      </div>
+
+                      <p className="mb-2 text-sm text-slate-500">
+                        Team: {submission.team || "Unknown"}
                       </p>
 
-                      {game.genres?.length ? (
+                      {submission.genres?.length ? (
                         <div className="mb-3 flex flex-wrap gap-2">
-                          {game.genres.map((genre) => (
+                          {submission.genres.map((genre) => (
                             <span
                               key={genre}
                               className="rounded-full bg-sky-100 px-3 py-1 text-xs font-medium text-blue-700"
@@ -544,47 +361,238 @@ export default function AdminPage() {
                         </div>
                       ) : null}
 
-                      <p className="text-sm leading-7 text-slate-300">
-                        {game.description || "No description"}
+                      <p className="mb-4 text-sm leading-7 text-slate-600">
+                        {submission.description || "No description"}
                       </p>
 
-                      {game.itchUrl ? (
-                        <p className="mt-3 text-sm text-slate-300">
+                      {submission.itchUrl ? (
+                        <p className="mb-4 text-sm text-slate-600">
                           Game link:{" "}
                           <a
-                            href={game.itchUrl}
+                            href={submission.itchUrl}
                             target="_blank"
                             rel="noreferrer"
-                            className="break-all text-blue-400 hover:text-blue-300"
+                            className="break-all text-blue-600 hover:text-blue-700"
                           >
-                            {game.itchUrl}
+                            {submission.itchUrl}
                           </a>
                         </p>
                       ) : null}
-                    </div>
 
-                    <div className="flex flex-wrap gap-3 md:flex-col">
-                      <button
-                        onClick={() => startEdit(game)}
-                        className="rounded-full bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700"
-                      >
-                        Edit
-                      </button>
+                      <div className="flex flex-wrap gap-3">
+                        <button
+                          onClick={() => handleApprove(submission)}
+                          className="rounded-full bg-emerald-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-emerald-700"
+                        >
+                          Approve
+                        </button>
 
-                      <button
-                        onClick={() => handleDeleteGame(game.id)}
-                        className="rounded-full bg-rose-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-rose-700"
-                      >
-                        Delete
-                      </button>
+                        <button
+                          onClick={() => handleReject(submission.id)}
+                          className="rounded-full bg-rose-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-rose-700"
+                        >
+                          Reject
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                </article>
-              ))}
+                  </article>
+                ))}
+              </div>
+            )}
+          </section>
+
+          <section className="mb-10">
+            <div className="mb-4">
+              <h2 className="text-2xl font-semibold">Edit published game</h2>
+              <p className="mt-1 text-slate-500">
+                Select a published game below to update its info.
+              </p>
             </div>
-          )}
-        </section>
-      </div>
+
+            {editingGameId ? (
+              <form
+                onSubmit={handleSaveEdit}
+                className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
+              >
+                <div className="grid gap-6 md:grid-cols-2">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-slate-700">
+                      Title
+                    </label>
+                    <input
+                      name="title"
+                      value={editForm.title}
+                      onChange={handleEditChange}
+                      className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500"
+                      required
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-slate-700">
+                      Team
+                    </label>
+                    <input
+                      name="team"
+                      value={editForm.team}
+                      onChange={handleEditChange}
+                      className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-6 space-y-2">
+                  <label className="text-sm font-medium text-slate-700">
+                    Genres
+                  </label>
+                  <input
+                    name="genres"
+                    value={editForm.genres}
+                    onChange={handleEditChange}
+                    placeholder="Action, Puzzle, Horror"
+                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500"
+                  />
+                </div>
+
+                <div className="mt-6 space-y-2">
+                  <label className="text-sm font-medium text-slate-700">
+                    Description
+                  </label>
+                  <textarea
+                    name="description"
+                    rows={5}
+                    value={editForm.description}
+                    onChange={handleEditChange}
+                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500"
+                    required
+                  />
+                </div>
+
+                <div className="mt-6 space-y-2">
+                  <label className="text-sm font-medium text-slate-700">
+                    Game link
+                  </label>
+                  <input
+                    name="itchUrl"
+                    value={editForm.itchUrl}
+                    onChange={handleEditChange}
+                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500"
+                  />
+                </div>
+
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <button
+                    type="submit"
+                    className="rounded-full bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700"
+                  >
+                    Save changes
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={cancelEdit}
+                    className="rounded-full bg-slate-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-700"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            ) : (
+              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm text-slate-600">
+                No game selected for editing.
+              </div>
+            )}
+          </section>
+
+          <section>
+            <div className="mb-4">
+              <h2 className="text-2xl font-semibold">Published games</h2>
+              <p className="mt-1 text-slate-500">
+                These are the games currently shown on the public site.
+              </p>
+            </div>
+
+            {isLoadingGames ? (
+              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm text-slate-600">
+                Loading games...
+              </div>
+            ) : games.length === 0 ? (
+              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm text-slate-600">
+                No published games yet.
+              </div>
+            ) : (
+              <div className="grid gap-6">
+                {games.map((game) => (
+                  <article
+                    key={game.id}
+                    className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
+                  >
+                    <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-start">
+                      <div>
+                        <h3 className="mb-2 text-xl font-semibold">
+                          {game.title || "Untitled game"}
+                        </h3>
+
+                        <p className="mb-2 text-sm text-slate-500">
+                          Team: {game.team || "Unknown"}
+                        </p>
+
+                        {game.genres?.length ? (
+                          <div className="mb-3 flex flex-wrap gap-2">
+                            {game.genres.map((genre) => (
+                              <span
+                                key={genre}
+                                className="rounded-full bg-sky-100 px-3 py-1 text-xs font-medium text-blue-700"
+                              >
+                                {genre}
+                              </span>
+                            ))}
+                          </div>
+                        ) : null}
+
+                        <p className="text-sm leading-7 text-slate-600">
+                          {game.description || "No description"}
+                        </p>
+
+                        {game.itchUrl ? (
+                          <p className="mt-3 text-sm text-slate-600">
+                            Game link:{" "}
+                            <a
+                              href={game.itchUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="break-all text-blue-600 hover:text-blue-700"
+                            >
+                              {game.itchUrl}
+                            </a>
+                          </p>
+                        ) : null}
+                      </div>
+
+                      <div className="flex flex-wrap gap-3 md:flex-col">
+                        <button
+                          onClick={() => startEdit(game)}
+                          className="rounded-full bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700"
+                        >
+                          Edit
+                        </button>
+
+                        <button
+                          onClick={() => handleDeleteGame(game.id)}
+                          className="rounded-full bg-rose-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-rose-700"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
+          </section>
+        </div>
+      </section>
     </div>
   );
 }

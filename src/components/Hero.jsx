@@ -25,11 +25,7 @@ export default function Hero() {
         <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="space-y-3">
             <div className="inline-flex items-center gap-2 rounded-full bg-sky-100 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-blue-700">
-              <img
-                src="/logo.png"
-                alt="GameDev Club logo"
-                className="h-4 w-4 object-contain"
-              />
+
               HCMUT Game Dev Club
             </div>
 

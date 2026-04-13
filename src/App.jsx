@@ -39,8 +39,7 @@ function HomePage() {
   }, [fetchGames]);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
-      <Navbar />
+    <div className="min-h-screen bg-white text-slate-900">
       <Hero />
       <GamesSection
         games={games}
@@ -54,6 +53,8 @@ function HomePage() {
 export default function App() {
   return (
     <BrowserRouter>
+      <Navbar />
+
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/submit" element={<SubmitPage />} />
