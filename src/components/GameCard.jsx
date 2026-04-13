@@ -1,12 +1,3 @@
-type GameCardProps = {
-  title: string;
-  team: string;
-  genres: string[];
-  description: string;
-  image: string;
-  itchUrl?: string;
-};
-
 export default function GameCard({
   title,
   team,
@@ -14,7 +5,7 @@ export default function GameCard({
   description,
   image,
   itchUrl,
-}: GameCardProps) {
+}) {
   return (
     <article className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
       <div className="aspect-video overflow-hidden bg-slate-100">

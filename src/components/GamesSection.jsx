@@ -2,23 +2,6 @@ import { useMemo, useState } from "react";
 import GameCard from "./GameCard";
 import { genreOptions } from "../data/genres";
 
-type Game = {
-  id: string | number;
-  title: string;
-  team: string;
-  genres: string[];
-  description: string;
-  image?: string;
-  createdAt?: number;
-  itchUrl?: string;
-};
-
-type GamesSectionProps = {
-  games?: Game[];
-  isLoading?: boolean;
-  loadError?: string;
-};
-
 const fallbackImage =
   "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80";
 
@@ -26,7 +9,7 @@ export default function GamesSection({
   games = [],
   isLoading = false,
   loadError = "",
-}: GamesSectionProps) {
+}) {
   const [selectedGenre, setSelectedGenre] = useState("All");
 
   const genres = useMemo(() => {
