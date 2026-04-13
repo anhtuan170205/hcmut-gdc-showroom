@@ -1,3 +1,7 @@
+import { useState } from "react";
+
+const fallbackImage = "/games/placeholder.jpg";
+
 export default function GameCard({
   title,
   team,
@@ -6,12 +10,15 @@ export default function GameCard({
   image,
   itchUrl,
 }) {
+  const [imgSrc, setImgSrc] = useState(image || fallbackImage);
+
   return (
     <article className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
       <div className="aspect-video overflow-hidden bg-slate-100">
         <img
-          src={image}
+          src={imgSrc}
           alt={title}
+          onError={() => setImgSrc(fallbackImage)}
           className="h-full w-full object-cover transition duration-300 hover:scale-105"
         />
       </div>

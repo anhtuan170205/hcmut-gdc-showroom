@@ -10,6 +10,14 @@ import {
 import { db } from "../lib/firebase";
 import { createGame } from "./games";
 
+function slugify(value = "") {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 export async function createSubmission(submission) {
   const docRef = await addDoc(collection(db, "submissions"), {
     ...submission,
@@ -40,14 +48,14 @@ export async function approveSubmission(submission) {
   }
 
   const gameId = await createGame({
-    title: submission.title,
-    team: submission.team,
+    title: submission.title || "",
+    team: submission.team || "",
     genres: submission.genres || [],
-    description: submission.description,
-    image: submission.image,
-    itchUrl: submission.itchUrl,
+    description: submission.description || "",
+    itchUrl: submission.itchUrl || "",
     platforms: submission.platforms || ["Windows"],
     featured: submission.featured ?? false,
+    slug: slugify(submission.title || ""),
   });
 
   await updateDoc(doc(db, "submissions", submission.id), {

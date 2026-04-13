@@ -14,7 +14,6 @@ const initialEditForm = {
   team: "",
   genres: "",
   description: "",
-  image: "",
   itchUrl: "",
 };
 
@@ -95,7 +94,6 @@ export default function AdminPage() {
       team: game.team || "",
       genres: Array.isArray(game.genres) ? game.genres.join(", ") : "",
       description: game.description || "",
-      image: game.image || "",
       itchUrl: game.itchUrl || "",
     });
     setMessage("");
@@ -129,7 +127,6 @@ export default function AdminPage() {
           .map((g) => g.trim())
           .filter(Boolean),
         description: editForm.description.trim(),
-        image: editForm.image.trim(),
         itchUrl: editForm.itchUrl.trim(),
       });
 
@@ -330,81 +327,65 @@ export default function AdminPage() {
                   key={submission.id}
                   className="rounded-3xl border border-slate-800 bg-slate-900 p-6"
                 >
-                  <div className="grid gap-6 md:grid-cols-[220px_1fr]">
-                    <div className="aspect-video overflow-hidden rounded-2xl bg-slate-800">
-                      {submission.image ? (
-                        <img
-                          src={submission.image}
-                          alt={submission.title || "Submission cover"}
-                          className="h-full w-full object-cover"
-                        />
-                      ) : (
-                        <div className="flex h-full items-center justify-center text-sm text-slate-400">
-                          No image
-                        </div>
-                      )}
+                  <div>
+                    <div className="mb-3 flex flex-wrap items-center gap-2">
+                      <h3 className="text-xl font-semibold">
+                        {submission.title || "Untitled game"}
+                      </h3>
+                      <span className="rounded-full bg-amber-500/15 px-3 py-1 text-xs font-medium text-amber-300">
+                        Pending
+                      </span>
                     </div>
 
-                    <div>
-                      <div className="mb-3 flex flex-wrap items-center gap-2">
-                        <h3 className="text-xl font-semibold">
-                          {submission.title || "Untitled game"}
-                        </h3>
-                        <span className="rounded-full bg-amber-500/15 px-3 py-1 text-xs font-medium text-amber-300">
-                          Pending
-                        </span>
-                      </div>
+                    <p className="mb-2 text-sm text-slate-400">
+                      Team: {submission.team || "Unknown"}
+                    </p>
 
-                      <p className="mb-2 text-sm text-slate-400">
-                        Team: {submission.team || "Unknown"}
-                      </p>
-
-                      {submission.genres?.length ? (
-                        <div className="mb-3 flex flex-wrap gap-2">
-                          {submission.genres.map((genre) => (
-                            <span
-                              key={genre}
-                              className="rounded-full bg-sky-100 px-3 py-1 text-xs font-medium text-blue-700"
-                            >
-                              {genre}
-                            </span>
-                          ))}
-                        </div>
-                      ) : null}
-
-                      <p className="mb-4 text-sm leading-7 text-slate-300">
-                        {submission.description || "No description"}
-                      </p>
-
-                      {submission.itchUrl ? (
-                        <p className="mb-4 text-sm text-slate-300">
-                          Game link:{" "}
-                          <a
-                            href={submission.itchUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="break-all text-blue-400 hover:text-blue-300"
+                    {submission.genres?.length ? (
+                      <div className="mb-3 flex flex-wrap gap-2">
+                        {submission.genres.map((genre) => (
+                          <span
+                            key={genre}
+                            className="rounded-full bg-sky-100 px-3 py-1 text-xs font-medium text-blue-700"
                           >
-                            {submission.itchUrl}
-                          </a>
-                        </p>
-                      ) : null}
-
-                      <div className="flex flex-wrap gap-3">
-                        <button
-                          onClick={() => handleApprove(submission)}
-                          className="rounded-full bg-emerald-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-emerald-700"
-                        >
-                          Approve
-                        </button>
-
-                        <button
-                          onClick={() => handleReject(submission.id)}
-                          className="rounded-full bg-rose-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-rose-700"
-                        >
-                          Reject
-                        </button>
+                            {genre}
+                          </span>
+                        ))}
                       </div>
+                    ) : null}
+
+                    <p className="mb-4 text-sm leading-7 text-slate-300">
+                      {submission.description || "No description"}
+                    </p>
+
+                    {submission.itchUrl ? (
+                      <p className="mb-4 text-sm text-slate-300">
+                        Game link:{" "}
+                        <a
+                          href={submission.itchUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="break-all text-blue-400 hover:text-blue-300"
+                        >
+                          {submission.itchUrl}
+                        </a>
+                      </p>
+                    ) : null}
+
+                    <div className="flex flex-wrap gap-3">
+                      <button
+                        onClick={() => handleApprove(submission)}
+                        className="rounded-full bg-emerald-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-emerald-700"
+                      >
+                        Approve
+                      </button>
+
+                      <button
+                        onClick={() => handleReject(submission.id)}
+                        className="rounded-full bg-rose-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-rose-700"
+                      >
+                        Reject
+                      </button>
                     </div>
                   </div>
                 </article>
@@ -481,30 +462,16 @@ export default function AdminPage() {
                 />
               </div>
 
-              <div className="mt-6 grid gap-6 md:grid-cols-2">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-slate-200">
-                    Cover image link
-                  </label>
-                  <input
-                    name="image"
-                    value={editForm.image}
-                    onChange={handleEditChange}
-                    className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-blue-500"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-slate-200">
-                    Game link
-                  </label>
-                  <input
-                    name="itchUrl"
-                    value={editForm.itchUrl}
-                    onChange={handleEditChange}
-                    className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-blue-500"
-                  />
-                </div>
+              <div className="mt-6 space-y-2">
+                <label className="text-sm font-medium text-slate-200">
+                  Game link
+                </label>
+                <input
+                  name="itchUrl"
+                  value={editForm.itchUrl}
+                  onChange={handleEditChange}
+                  className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-blue-500"
+                />
               </div>
 
               <div className="mt-6 flex flex-wrap gap-3">
@@ -554,21 +521,7 @@ export default function AdminPage() {
                   key={game.id}
                   className="rounded-3xl border border-slate-800 bg-slate-900 p-6"
                 >
-                  <div className="grid gap-6 md:grid-cols-[220px_1fr_auto] md:items-start">
-                    <div className="aspect-video overflow-hidden rounded-2xl bg-slate-800">
-                      {game.image ? (
-                        <img
-                          src={game.image}
-                          alt={game.title || "Game cover"}
-                          className="h-full w-full object-cover"
-                        />
-                      ) : (
-                        <div className="flex h-full items-center justify-center text-sm text-slate-400">
-                          No image
-                        </div>
-                      )}
-                    </div>
-
+                  <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-start">
                     <div>
                       <h3 className="mb-2 text-xl font-semibold">
                         {game.title || "Untitled game"}

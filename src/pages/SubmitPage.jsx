@@ -8,7 +8,6 @@ const initialFormData = {
   genres: [],
   description: "",
   buildLink: "",
-  imageLink: "",
 };
 
 function withTimeout(promise, ms = 8000) {
@@ -59,7 +58,6 @@ export default function SubmitPage() {
           team: formData.teamName,
           genres: formData.genres,
           description: formData.description,
-          image: formData.imageLink,
           itchUrl: formData.buildLink,
           platforms: ["Windows"],
           featured: false,
@@ -186,42 +184,22 @@ export default function SubmitPage() {
                 />
               </div>
 
-              <div className="grid gap-6 md:grid-cols-2">
-                <div className="space-y-2">
-                  <label
-                    htmlFor="buildLink"
-                    className="text-sm font-medium text-slate-200"
-                  >
-                    Game Link
-                  </label>
-                  <input
-                    id="buildLink"
-                    name="buildLink"
-                    type="url"
-                    value={formData.buildLink}
-                    onChange={handleChange}
-                    placeholder="https://your-game-link.com"
-                    className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-blue-500"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label
-                    htmlFor="imageLink"
-                    className="text-sm font-medium text-slate-200"
-                  >
-                    Cover Image Link
-                  </label>
-                  <input
-                    id="imageLink"
-                    name="imageLink"
-                    type="url"
-                    value={formData.imageLink}
-                    onChange={handleChange}
-                    placeholder="https://your-image-link.com"
-                    className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-blue-500"
-                  />
-                </div>
+              <div className="space-y-2">
+                <label
+                  htmlFor="buildLink"
+                  className="text-sm font-medium text-slate-200"
+                >
+                  Game Link
+                </label>
+                <input
+                  id="buildLink"
+                  name="buildLink"
+                  type="url"
+                  value={formData.buildLink}
+                  onChange={handleChange}
+                  placeholder="https://your-game-link.com"
+                  className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-blue-500"
+                />
               </div>
 
               <div className="pt-2">

@@ -2,8 +2,26 @@ import { useMemo, useState } from "react";
 import GameCard from "./GameCard";
 import { genreOptions } from "../data/genres";
 
-const fallbackImage =
-  "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80";
+const fallbackImage = "/games/placeholder.jpg";
+
+function slugify(value = "") {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function getGameImagePath(game) {
+  if (game.image) return game.image;
+
+  const baseName = game.slug || game.title;
+  const slug = slugify(baseName);
+
+  if (!slug) return fallbackImage;
+
+  return `/games/${slug}.jpg`;
+}
 
 export default function GamesSection({
   games = [],
@@ -76,7 +94,7 @@ export default function GamesSection({
                 team={game.team}
                 genres={game.genres || []}
                 description={game.description}
-                image={game.image || fallbackImage}
+                image={getGameImagePath(game)}
                 itchUrl={game.itchUrl}
               />
             ))}
