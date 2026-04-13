@@ -4,6 +4,7 @@ type GameCardProps = {
   genres: string[];
   description: string;
   image: string;
+  itchUrl?: string;
 };
 
 export default function GameCard({
@@ -12,6 +13,7 @@ export default function GameCard({
   genres,
   description,
   image,
+  itchUrl,
 }: GameCardProps) {
   return (
     <article className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
@@ -46,6 +48,25 @@ export default function GameCard({
             </span>
           ))}
         </div>
+
+        {itchUrl ? (
+          <a
+            href={itchUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="block w-full rounded-2xl bg-blue-600 px-5 py-3 text-center text-sm font-semibold text-white transition hover:bg-blue-700"
+          >
+            Play
+          </a>
+        ) : (
+          <button
+            type="button"
+            disabled
+            className="block w-full cursor-not-allowed rounded-2xl bg-slate-200 px-5 py-3 text-center text-sm font-semibold text-slate-500"
+          >
+            Play
+          </button>
+        )}
       </div>
     </article>
   );

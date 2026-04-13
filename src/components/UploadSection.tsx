@@ -11,6 +11,10 @@ type UploadFormData = {
   imageLink: string;
 };
 
+type UploadSectionProps = {
+  onGameSubmitted: () => Promise<void> | void;
+};
+
 const initialFormData: UploadFormData = {
   gameTitle: "",
   teamName: "",
@@ -29,7 +33,7 @@ function withTimeout<T>(promise: Promise<T>, ms = 8000): Promise<T> {
   ]);
 }
 
-export default function UploadSection() {
+export default function UploadSection({ onGameSubmitted }: UploadSectionProps) {
   const [formData, setFormData] = useState<UploadFormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState("");
@@ -81,6 +85,7 @@ export default function UploadSection() {
       );
 
       console.log("submit success", result);
+      await onGameSubmitted?.();
       setFormData(initialFormData);
       setMessage("Game submitted successfully.");
     } catch (error) {

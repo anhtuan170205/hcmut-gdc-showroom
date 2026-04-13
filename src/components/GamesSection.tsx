@@ -1,9 +1,32 @@
 import { useMemo, useState } from "react";
 import GameCard from "./GameCard";
-import { mockGames } from "../data/mockGames";
 import { genreOptions } from "../data/genres";
 
-export default function GamesSection() {
+type Game = {
+  id: string | number;
+  title: string;
+  team: string;
+  genres: string[];
+  description: string;
+  image?: string;
+  createdAt?: number;
+  itchUrl?: string;
+};
+
+type GamesSectionProps = {
+  games?: Game[];
+  isLoading?: boolean;
+  loadError?: string;
+};
+
+const fallbackImage =
+  "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80";
+
+export default function GamesSection({
+  games = [],
+  isLoading = false,
+  loadError = "",
+}: GamesSectionProps) {
   const [selectedGenre, setSelectedGenre] = useState("All");
 
   const genres = useMemo(() => {
@@ -11,9 +34,9 @@ export default function GamesSection() {
   }, []);
 
   const filteredGames = useMemo(() => {
-    if (selectedGenre === "All") return mockGames;
-    return mockGames.filter((game) => game.genres.includes(selectedGenre));
-  }, [selectedGenre]);
+    if (selectedGenre === "All") return games;
+    return games.filter((game) => game.genres?.includes(selectedGenre));
+  }, [games, selectedGenre]);
 
   return (
     <section id="games" className="border-b border-slate-200 bg-white">
@@ -31,6 +54,10 @@ export default function GamesSection() {
             Browse student-made games from HCMUT Game Dev Club, from action and
             platformers to cozy adventures and creative experiments.
           </p>
+
+          {loadError ? (
+            <p className="text-sm text-amber-600">{loadError}</p>
+          ) : null}
         </div>
 
         <div className="mb-8 flex flex-wrap gap-3">
@@ -53,16 +80,21 @@ export default function GamesSection() {
           })}
         </div>
 
-        {filteredGames.length > 0 ? (
+        {isLoading ? (
+          <div className="rounded-3xl border border-slate-200 bg-slate-50 p-8 text-center text-slate-500">
+            Loading games...
+          </div>
+        ) : filteredGames.length > 0 ? (
           <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {filteredGames.map((game) => (
               <GameCard
                 key={game.id}
                 title={game.title}
                 team={game.team}
-                genres={game.genres}
+                genres={game.genres || []}
                 description={game.description}
-                image={game.image}
+                image={game.image || fallbackImage}
+                itchUrl={game.itchUrl}
               />
             ))}
           </div>
