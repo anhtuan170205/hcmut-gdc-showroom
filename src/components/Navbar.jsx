@@ -1,11 +1,20 @@
+import { Link, NavLink } from "react-router-dom";
+
 export default function Navbar() {
+  const linkClass = ({ isActive }) =>
+    `rounded-lg px-4 py-2 text-sm font-medium transition ${
+      isActive
+        ? "bg-blue-600 text-white"
+        : "text-slate-700 hover:bg-white hover:text-blue-700"
+    }`;
+
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white">
+    <header className="sticky top-0 z-50 border-b border-sky-200 bg-sky-100/95 backdrop-blur">
       <div className="mx-auto grid max-w-7xl grid-cols-[auto_1fr_auto] items-center px-6 py-4 md:px-8">
-        <a href="#home" className="flex items-center gap-3">
-          <div className="rounded-xl bg-sky-100 p-2">
+        <Link to="/" className="flex items-center gap-3">
+          <div className="rounded-xl bg-white p-2 shadow-sm">
             <img
-              src="/logo.png"
+              src="/logo.jpg"
               alt="GameDev Club logo"
               className="h-8 w-8 object-contain"
             />
@@ -15,41 +24,26 @@ export default function Navbar() {
             <div className="pixel-font text-[10px] leading-4 text-slate-900 md:text-xs">
               HCMUT GameDev Club
             </div>
-            <div className="text-xs text-slate-500">
+            <div className="text-xs text-slate-600">
               Student Game Showcase
             </div>
           </div>
-        </a>
+        </Link>
 
         <nav className="hidden items-center justify-center gap-2 md:flex">
-          <a
-            href="#home"
-            className="rounded-lg px-4 py-2 text-sm text-slate-700 transition hover:bg-sky-50"
-          >
+          <NavLink to="/" className={linkClass} end>
             Home
-          </a>
-          <a
-            href="#games"
-            className="rounded-lg px-4 py-2 text-sm text-slate-700 transition hover:bg-sky-50"
-          >
-            Games
-          </a>
-          <a
-            href="#upload"
-            className="rounded-lg px-4 py-2 text-sm text-slate-700 transition hover:bg-sky-50"
-          >
+          </NavLink>
+
+          <NavLink to="/submit" className={linkClass}>
             Upload
-          </a>
+          </NavLink>
+
+          <NavLink to="/admin" className={linkClass}>
+            Admin
+          </NavLink>
         </nav>
 
-        <div className="flex justify-end">
-          <a
-            href="#games"
-            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
-          >
-            Explore
-          </a>
-        </div>
       </div>
     </header>
   );

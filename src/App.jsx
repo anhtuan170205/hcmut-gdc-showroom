@@ -1,12 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import GamesSection from "./components/GamesSection";
-import UploadSection from "./components/UploadSection";
+import SubmitPage from "./pages/SubmitPage";
+import AdminPage from "./pages/AdminPage";
 import { getGames } from "./services/games";
 import { mockGames } from "./data/mockGames";
 
-export default function App() {
+function HomePage() {
   const [games, setGames] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
@@ -37,15 +39,27 @@ export default function App() {
   }, [fetchGames]);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
-      <Navbar />
+    <div className="min-h-screen bg-white text-slate-900">
       <Hero />
       <GamesSection
         games={games}
         isLoading={isLoading}
         loadError={loadError}
       />
-      <UploadSection onGameSubmitted={fetchGames} />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Navbar />
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/submit" element={<SubmitPage />} />
+        <Route path="/admin" element={<AdminPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
