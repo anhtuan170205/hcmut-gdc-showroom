@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
-import GameCard from "./GameCard";
+import GameCard from "../components/GameCard";
 import { genreOptions } from "../data/genres";
 import { getGameImagePath } from "../utils/gameHelpers";
 
-export default function GamesSection({
+export default function GamesPage({
   games = [],
   isLoading = false,
   loadError = "",
@@ -28,12 +28,11 @@ export default function GamesSection({
           </div>
 
           <h2 className="pixel-font text-lg leading-8 text-slate-900 md:text-2xl">
-            Explore more club projects.
+            Explore club projects.
           </h2>
 
           <p className="max-w-2xl text-base leading-8 text-slate-600">
-            Browse student-made games from HCMUT Game Dev Club, from action and
-            platformers to cozy adventures and creative experiments.
+            Browse student-made games from HCMUT Game Dev Club, from action and platformers to cozy adventures and creative experiments.
           </p>
 
           {loadError ? (

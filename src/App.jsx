@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import GamesSection from "./components/GamesSection";
+import GamePage from "./pages/GamesPage";
 import SubmitPage from "./pages/SubmitPage";
 import AdminPage from "./pages/AdminPage";
 import { getGames } from "./services/games";
@@ -40,8 +39,7 @@ function HomePage() {
 
   return (
     <div className="min-h-screen bg-white text-slate-900">
-      <Hero />
-      <GamesSection
+      <GamePage
         games={games}
         isLoading={isLoading}
         loadError={loadError}
