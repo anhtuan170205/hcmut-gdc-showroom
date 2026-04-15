@@ -140,9 +140,6 @@ export default function AdminPage() {
   }
 
   async function handleDeleteGame(gameId) {
-    const confirmed = window.confirm("Delete this game?");
-    if (!confirmed) return;
-
     setMessage("");
 
     try {

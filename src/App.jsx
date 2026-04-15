@@ -6,6 +6,7 @@ import SubmitPage from "./pages/SubmitPage";
 import AdminPage from "./pages/AdminPage";
 import { getGames } from "./services/games";
 import { mockGames } from "./data/mockGames";
+import Footer from "./components/Footer";
 
 function HomePage() {
   const [games, setGames] = useState([]);
@@ -58,6 +59,7 @@ export default function App() {
         <Route path="/submit" element={<SubmitPage />} />
         <Route path="/admin" element={<AdminPage />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
