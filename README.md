@@ -1,16 +1,30 @@
-# React + Vite
+# HCMUT GameDev Club Showroom
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web app for showcasing student-made games from the HCMUT GameDev Club.  
+This project lets visitors browse games, filter by genre, and view game details, while club members can submit new games for review through a submission form. Admins can then approve submissions and publish them to the public gallery.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Public game showcase page
+- Game cards with:
+  - Cover image
+  - Game title
+  - Team name
+  - Genre tags
+  - Short description
+  - Play button / external game link
+- Genre-based filtering
+- Game submission form
+- Admin review page for pending submissions
+- Firebase integration for:
+  - Firestore database
+  - Storage for uploaded images
+- Responsive UI built with React + Vite + Tailwind CSS
+- Ready for deployment on Vercel
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Frontend:** React, Vite
+- **Styling:** Tailwind CSS
+- **Backend services:** Firebase Firestore
+- **Hosting:** Vercel
