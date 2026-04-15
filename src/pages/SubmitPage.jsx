@@ -78,31 +78,31 @@ export default function SubmitPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-slate-900">
-      <section className="border-b border-slate-200 bg-white">
+    <div className="min-h-screen bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+      <section className="border-b border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950">
         <div className="mx-auto max-w-5xl px-6 py-12 md:px-8 md:py-16">
           <div className="mb-8 space-y-3 md:mb-10">
-            <div className="inline-flex items-center gap-2 rounded-full bg-sky-100 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-blue-700">
+            <div className="inline-flex items-center gap-2 rounded-full bg-sky-100 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-blue-700 dark:bg-slate-800 dark:text-sky-300">
               Submit Your Game
             </div>
 
-            <h1 className="pixel-font text-lg leading-8 text-slate-900 md:text-2xl md:leading-[2.8rem]">
+            <h1 className="pixel-font text-lg leading-8 text-slate-900 dark:text-slate-100 md:text-2xl md:leading-[2.8rem]">
               Share your project with the club.
             </h1>
 
-            <p className="max-w-2xl text-base leading-8 text-slate-600">
+            <p className="max-w-2xl text-base leading-8 text-slate-600 dark:text-slate-400">
               Submit your game to the HCMUT Game Dev Club showroom. Your entry
               will be reviewed before it appears publicly.
             </p>
           </div>
 
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900 md:p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid gap-6 md:grid-cols-2">
                 <div className="space-y-2">
                   <label
                     htmlFor="gameTitle"
-                    className="text-sm font-medium text-slate-700"
+                    className="text-sm font-medium text-slate-700 dark:text-slate-300"
                   >
                     Game Title
                   </label>
@@ -113,7 +113,7 @@ export default function SubmitPage() {
                     value={formData.gameTitle}
                     onChange={handleChange}
                     placeholder="Enter your game title"
-                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500"
+                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-500"
                     required
                   />
                 </div>
@@ -121,7 +121,7 @@ export default function SubmitPage() {
                 <div className="space-y-2">
                   <label
                     htmlFor="teamName"
-                    className="text-sm font-medium text-slate-700"
+                    className="text-sm font-medium text-slate-700 dark:text-slate-300"
                   >
                     Team Name
                   </label>
@@ -132,14 +132,14 @@ export default function SubmitPage() {
                     value={formData.teamName}
                     onChange={handleChange}
                     placeholder="Enter your team name"
-                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500"
+                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-500"
                     required
                   />
                 </div>
               </div>
 
               <div className="space-y-3">
-                <label className="text-sm font-medium text-slate-700">
+                <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
                   Genres
                 </label>
 
@@ -154,8 +154,8 @@ export default function SubmitPage() {
                         onClick={() => handleGenreToggle(genre)}
                         className={`rounded-full px-4 py-2 text-sm font-medium transition ${
                           isActive
-                            ? "bg-blue-600 text-white"
-                            : "bg-sky-100 text-blue-700 hover:bg-sky-200"
+                            ? "bg-blue-600 text-white dark:bg-sky-500 dark:text-slate-950"
+                            : "bg-sky-100 text-blue-700 hover:bg-sky-200 dark:bg-slate-800 dark:text-sky-300 dark:hover:bg-slate-700"
                         }`}
                       >
                         {genre}
@@ -168,7 +168,7 @@ export default function SubmitPage() {
               <div className="space-y-2">
                 <label
                   htmlFor="description"
-                  className="text-sm font-medium text-slate-700"
+                  className="text-sm font-medium text-slate-700 dark:text-slate-300"
                 >
                   Description
                 </label>
@@ -179,7 +179,7 @@ export default function SubmitPage() {
                   value={formData.description}
                   onChange={handleChange}
                   placeholder="Tell us what your game is about"
-                  className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500"
+                  className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-500"
                   required
                 />
               </div>
@@ -187,7 +187,7 @@ export default function SubmitPage() {
               <div className="space-y-2">
                 <label
                   htmlFor="buildLink"
-                  className="text-sm font-medium text-slate-700"
+                  className="text-sm font-medium text-slate-700 dark:text-slate-300"
                 >
                   Game Link
                 </label>
@@ -198,7 +198,7 @@ export default function SubmitPage() {
                   value={formData.buildLink}
                   onChange={handleChange}
                   placeholder="https://your-game-link.com"
-                  className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500"
+                  className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-500"
                 />
               </div>
 
@@ -206,14 +206,16 @@ export default function SubmitPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="rounded-full bg-blue-600 px-6 py-3 text-sm font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="rounded-full bg-blue-600 px-6 py-3 text-sm font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-sky-500 dark:text-slate-950 dark:hover:bg-sky-400"
                 >
                   {isSubmitting ? "Submitting..." : "Submit Game"}
                 </button>
               </div>
 
               {message ? (
-                <p className="text-sm text-slate-600">{message}</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">
+                  {message}
+                </p>
               ) : null}
             </form>
           </div>

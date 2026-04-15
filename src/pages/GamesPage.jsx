@@ -20,23 +20,29 @@ export default function GamesPage({
   }, [games, selectedGenre]);
 
   return (
-    <section id="games" className="border-b border-slate-200 bg-white">
+    <section
+      id="games"
+      className="border-b border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950"
+    >
       <div className="mx-auto max-w-7xl px-6 py-14 md:px-8 md:py-16">
         <div className="mb-8 space-y-3 md:mb-10">
-          <div className="inline-flex rounded-full bg-sky-100 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-blue-700">
+          <div className="inline-flex rounded-full bg-sky-100 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-blue-700 dark:bg-slate-800 dark:text-sky-300">
             Student Games
           </div>
 
-          <h2 className="pixel-font text-lg leading-8 text-slate-900 md:text-2xl">
+          <h2 className="pixel-font text-lg leading-8 text-slate-900 dark:text-slate-100 md:text-2xl">
             Explore club projects.
           </h2>
 
-          <p className="max-w-2xl text-base leading-8 text-slate-600">
-            Browse student-made games from HCMUT Game Dev Club, from action and platformers to cozy adventures and creative experiments.
+          <p className="max-w-2xl text-base leading-8 text-slate-600 dark:text-slate-400">
+            Browse student-made games from HCMUT Game Dev Club, from action and
+            platformers to cozy adventures and creative experiments.
           </p>
 
           {loadError ? (
-            <p className="text-sm text-amber-600">{loadError}</p>
+            <p className="text-sm text-amber-600 dark:text-amber-400">
+              {loadError}
+            </p>
           ) : null}
         </div>
 
@@ -50,8 +56,8 @@ export default function GamesPage({
                 onClick={() => setSelectedGenre(genre)}
                 className={`rounded-full px-4 py-2 text-sm font-medium transition ${
                   isActive
-                    ? "bg-blue-600 text-white"
-                    : "bg-sky-100 text-blue-700 hover:bg-sky-200"
+                    ? "bg-blue-600 text-white dark:bg-sky-500 dark:text-slate-950"
+                    : "bg-sky-100 text-blue-700 hover:bg-sky-200 dark:bg-slate-800 dark:text-sky-300 dark:hover:bg-slate-700"
                 }`}
               >
                 {genre}
@@ -61,7 +67,7 @@ export default function GamesPage({
         </div>
 
         {isLoading ? (
-          <div className="rounded-3xl border border-slate-200 bg-slate-50 p-8 text-center text-slate-500">
+          <div className="rounded-3xl border border-slate-200 bg-slate-50 p-8 text-center text-slate-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400">
             Loading games...
           </div>
         ) : filteredGames.length > 0 ? (
@@ -79,7 +85,7 @@ export default function GamesPage({
             ))}
           </div>
         ) : (
-          <div className="rounded-3xl border border-slate-200 bg-slate-50 p-8 text-center text-slate-500">
+          <div className="rounded-3xl border border-slate-200 bg-slate-50 p-8 text-center text-slate-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400">
             No games found in this genre.
           </div>
         )}

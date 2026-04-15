@@ -183,9 +183,11 @@ export default function AdminPage() {
 
   if (!authChecked) {
     return (
-      <div className="min-h-screen bg-white px-6 py-16 text-slate-900">
-        <div className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-          Checking authentication...
+      <div className="min-h-screen bg-white px-6 py-16 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+        <div className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <p className="text-slate-700 dark:text-slate-300">
+            Checking authentication...
+          </p>
         </div>
       </div>
     );
@@ -193,21 +195,23 @@ export default function AdminPage() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-white px-6 py-16 text-slate-900">
-        <div className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-          <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-sky-100 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-blue-700">
+      <div className="min-h-screen bg-white px-6 py-16 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+        <div className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-sky-100 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-blue-700 dark:bg-slate-800 dark:text-sky-300">
             Admin Dashboard
           </div>
 
-          <h1 className="mb-3 text-2xl font-semibold">Admin Login</h1>
-          <p className="mb-6 text-slate-600">
+          <h1 className="mb-3 text-2xl font-semibold text-slate-900 dark:text-slate-100">
+            Admin Login
+          </h1>
+          <p className="mb-6 text-slate-600 dark:text-slate-400">
             Sign in with your admin account to review submissions and manage
             games.
           </p>
 
           <button
             onClick={loginAdmin}
-            className="rounded-full bg-blue-600 px-6 py-3 text-sm font-medium text-white transition hover:bg-blue-700"
+            className="rounded-full bg-blue-600 px-6 py-3 text-sm font-medium text-white transition hover:bg-blue-700 dark:bg-sky-500 dark:text-slate-950 dark:hover:bg-sky-400"
           >
             Sign in with Google
           </button>
@@ -218,33 +222,48 @@ export default function AdminPage() {
 
   if (user && !ADMIN_UID) {
     return (
-      <div className="min-h-screen bg-white px-6 py-16 text-slate-900">
-        <div className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h1 className="mb-3 text-2xl font-semibold">Set up admin UID</h1>
-          <p className="mb-4 text-slate-600">
+      <div className="min-h-screen bg-white px-6 py-16 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+        <div className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <h1 className="mb-3 text-2xl font-semibold text-slate-900 dark:text-slate-100">
+            Set up admin UID
+          </h1>
+          <p className="mb-4 text-slate-600 dark:text-slate-400">
             You are signed in successfully. Copy this UID into your{" "}
-            <code>.env</code> file as <code>VITE_ADMIN_UID</code>.
+            <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+              .env
+            </code>{" "}
+            file as{" "}
+            <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+              VITE_ADMIN_UID
+            </code>
+            .
           </p>
 
-          <div className="mb-6 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-            <p className="mb-2 text-sm text-slate-500">Your Firebase UID</p>
-            <code className="break-all text-sm text-slate-900">{user.uid}</code>
+          <div className="mb-6 rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950">
+            <p className="mb-2 text-sm text-slate-500 dark:text-slate-400">
+              Your Firebase UID
+            </p>
+            <code className="break-all text-sm text-slate-900 dark:text-slate-100">
+              {user.uid}
+            </code>
           </div>
 
-          <div className="mb-6 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-            <p className="mb-2 text-sm text-slate-500">Put this in .env</p>
-            <code className="break-all text-sm text-slate-900">
+          <div className="mb-6 rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950">
+            <p className="mb-2 text-sm text-slate-500 dark:text-slate-400">
+              Put this in .env
+            </p>
+            <code className="break-all text-sm text-slate-900 dark:text-slate-100">
               VITE_ADMIN_UID={user.uid}
             </code>
           </div>
 
-          <p className="mb-6 text-sm text-slate-500">
+          <p className="mb-6 text-sm text-slate-500 dark:text-slate-400">
             After saving the file, restart your dev server.
           </p>
 
           <button
             onClick={logoutAdmin}
-            className="rounded-full bg-slate-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-700"
+            className="rounded-full bg-slate-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-700 dark:bg-slate-100 dark:text-slate-950 dark:hover:bg-slate-200"
           >
             Sign out
           </button>
@@ -255,16 +274,18 @@ export default function AdminPage() {
 
   if (!isAdmin) {
     return (
-      <div className="min-h-screen bg-white px-6 py-16 text-slate-900">
-        <div className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h1 className="mb-3 text-2xl font-semibold">Access denied</h1>
-          <p className="mb-6 text-slate-600">
+      <div className="min-h-screen bg-white px-6 py-16 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+        <div className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <h1 className="mb-3 text-2xl font-semibold text-slate-900 dark:text-slate-100">
+            Access denied
+          </h1>
+          <p className="mb-6 text-slate-600 dark:text-slate-400">
             You are signed in, but this account is not the admin account.
           </p>
 
           <button
             onClick={logoutAdmin}
-            className="rounded-full bg-slate-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-slate-700"
+            className="rounded-full bg-slate-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-slate-700 dark:bg-slate-100 dark:text-slate-950 dark:hover:bg-slate-200"
           >
             Sign out
           </button>
@@ -274,20 +295,20 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-slate-900">
-      <section className="border-b border-slate-200 bg-white">
+    <div className="min-h-screen bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+      <section className="border-b border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950">
         <div className="mx-auto max-w-7xl px-6 py-12 md:px-8 md:py-16">
           <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 rounded-full bg-sky-100 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-blue-700">
+              <div className="inline-flex items-center gap-2 rounded-full bg-sky-100 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-blue-700 dark:bg-slate-800 dark:text-sky-300">
                 Admin Dashboard
               </div>
 
-              <h1 className="pixel-font text-lg leading-8 text-slate-900 md:text-2xl md:leading-[2.8rem]">
+              <h1 className="pixel-font text-lg leading-8 text-slate-900 dark:text-slate-100 md:text-2xl md:leading-[2.8rem]">
                 Manage submissions and games.
               </h1>
 
-              <p className="max-w-2xl text-base leading-8 text-slate-600">
+              <p className="max-w-2xl text-base leading-8 text-slate-600 dark:text-slate-400">
                 Review pending submissions, approve or reject them, and update
                 published games.
               </p>
@@ -295,33 +316,35 @@ export default function AdminPage() {
 
             <button
               onClick={logoutAdmin}
-              className="rounded-full bg-slate-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-700"
+              className="rounded-full bg-slate-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-700 dark:bg-slate-100 dark:text-slate-950 dark:hover:bg-slate-200"
             >
               Sign out
             </button>
           </div>
 
           {message ? (
-            <div className="mb-6 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
+            <div className="mb-6 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300">
               {message}
             </div>
           ) : null}
 
           <section className="mb-10">
             <div className="mb-4">
-              <h2 className="text-2xl font-semibold">Pending submissions</h2>
-              <p className="mt-1 text-slate-500">
+              <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">
+                Pending submissions
+              </h2>
+              <p className="mt-1 text-slate-500 dark:text-slate-400">
                 These are not public yet. Approving will add them to the games
                 collection.
               </p>
             </div>
 
             {isLoadingSubmissions ? (
-              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm text-slate-600">
+              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm text-slate-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400">
                 Loading submissions...
               </div>
             ) : submissions.length === 0 ? (
-              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm text-slate-600">
+              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm text-slate-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400">
                 No pending submissions.
               </div>
             ) : (
@@ -329,19 +352,19 @@ export default function AdminPage() {
                 {submissions.map((submission) => (
                   <article
                     key={submission.id}
-                    className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
+                    className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900"
                   >
                     <div>
                       <div className="mb-3 flex flex-wrap items-center gap-2">
-                        <h3 className="text-xl font-semibold">
+                        <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
                           {submission.title || "Untitled game"}
                         </h3>
-                        <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-medium text-amber-700">
+                        <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-medium text-amber-700 dark:bg-amber-950/40 dark:text-amber-300">
                           Pending
                         </span>
                       </div>
 
-                      <p className="mb-2 text-sm text-slate-500">
+                      <p className="mb-2 text-sm text-slate-500 dark:text-slate-400">
                         Team: {submission.team || "Unknown"}
                       </p>
 
@@ -350,7 +373,7 @@ export default function AdminPage() {
                           {submission.genres.map((genre) => (
                             <span
                               key={genre}
-                              className="rounded-full bg-sky-100 px-3 py-1 text-xs font-medium text-blue-700"
+                              className="rounded-full bg-sky-100 px-3 py-1 text-xs font-medium text-blue-700 dark:bg-slate-800 dark:text-sky-300"
                             >
                               {genre}
                             </span>
@@ -358,18 +381,18 @@ export default function AdminPage() {
                         </div>
                       ) : null}
 
-                      <p className="mb-4 text-sm leading-7 text-slate-600">
+                      <p className="mb-4 text-sm leading-7 text-slate-600 dark:text-slate-400">
                         {submission.description || "No description"}
                       </p>
 
                       {submission.itchUrl ? (
-                        <p className="mb-4 text-sm text-slate-600">
+                        <p className="mb-4 text-sm text-slate-600 dark:text-slate-400">
                           Game link:{" "}
                           <a
                             href={submission.itchUrl}
                             target="_blank"
                             rel="noreferrer"
-                            className="break-all text-blue-600 hover:text-blue-700"
+                            className="break-all text-blue-600 hover:text-blue-700 dark:text-sky-300 dark:hover:text-sky-200"
                           >
                             {submission.itchUrl}
                           </a>
@@ -400,8 +423,10 @@ export default function AdminPage() {
 
           <section className="mb-10">
             <div className="mb-4">
-              <h2 className="text-2xl font-semibold">Edit published game</h2>
-              <p className="mt-1 text-slate-500">
+              <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">
+                Edit published game
+              </h2>
+              <p className="mt-1 text-slate-500 dark:text-slate-400">
                 Select a published game below to update its info.
               </p>
             </div>
@@ -409,38 +434,38 @@ export default function AdminPage() {
             {editingGameId ? (
               <form
                 onSubmit={handleSaveEdit}
-                className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
+                className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900"
               >
                 <div className="grid gap-6 md:grid-cols-2">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-slate-700">
+                    <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
                       Title
                     </label>
                     <input
                       name="title"
                       value={editForm.title}
                       onChange={handleEditChange}
-                      className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500"
+                      className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-500"
                       required
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-slate-700">
+                    <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
                       Team
                     </label>
                     <input
                       name="team"
                       value={editForm.team}
                       onChange={handleEditChange}
-                      className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500"
+                      className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-500"
                       required
                     />
                   </div>
                 </div>
 
                 <div className="mt-6 space-y-2">
-                  <label className="text-sm font-medium text-slate-700">
+                  <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Genres
                   </label>
                   <input
@@ -448,12 +473,12 @@ export default function AdminPage() {
                     value={editForm.genres}
                     onChange={handleEditChange}
                     placeholder="Action, Puzzle, Horror"
-                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500"
+                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-500"
                   />
                 </div>
 
                 <div className="mt-6 space-y-2">
-                  <label className="text-sm font-medium text-slate-700">
+                  <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Description
                   </label>
                   <textarea
@@ -461,27 +486,27 @@ export default function AdminPage() {
                     rows={5}
                     value={editForm.description}
                     onChange={handleEditChange}
-                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500"
+                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-500"
                     required
                   />
                 </div>
 
                 <div className="mt-6 space-y-2">
-                  <label className="text-sm font-medium text-slate-700">
+                  <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Game link
                   </label>
                   <input
                     name="itchUrl"
                     value={editForm.itchUrl}
                     onChange={handleEditChange}
-                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500"
+                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-500"
                   />
                 </div>
 
                 <div className="mt-6 flex flex-wrap gap-3">
                   <button
                     type="submit"
-                    className="rounded-full bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700"
+                    className="rounded-full bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700 dark:bg-sky-500 dark:text-slate-950 dark:hover:bg-sky-400"
                   >
                     Save changes
                   </button>
@@ -489,14 +514,14 @@ export default function AdminPage() {
                   <button
                     type="button"
                     onClick={cancelEdit}
-                    className="rounded-full bg-slate-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-700"
+                    className="rounded-full bg-slate-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-700 dark:bg-slate-100 dark:text-slate-950 dark:hover:bg-slate-200"
                   >
                     Cancel
                   </button>
                 </div>
               </form>
             ) : (
-              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm text-slate-600">
+              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm text-slate-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400">
                 No game selected for editing.
               </div>
             )}
@@ -504,18 +529,20 @@ export default function AdminPage() {
 
           <section>
             <div className="mb-4">
-              <h2 className="text-2xl font-semibold">Published games</h2>
-              <p className="mt-1 text-slate-500">
+              <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">
+                Published games
+              </h2>
+              <p className="mt-1 text-slate-500 dark:text-slate-400">
                 These are the games currently shown on the public site.
               </p>
             </div>
 
             {isLoadingGames ? (
-              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm text-slate-600">
+              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm text-slate-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400">
                 Loading games...
               </div>
             ) : games.length === 0 ? (
-              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm text-slate-600">
+              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm text-slate-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400">
                 No published games yet.
               </div>
             ) : (
@@ -523,15 +550,15 @@ export default function AdminPage() {
                 {games.map((game) => (
                   <article
                     key={game.id}
-                    className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
+                    className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900"
                   >
                     <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-start">
                       <div>
-                        <h3 className="mb-2 text-xl font-semibold">
+                        <h3 className="mb-2 text-xl font-semibold text-slate-900 dark:text-slate-100">
                           {game.title || "Untitled game"}
                         </h3>
 
-                        <p className="mb-2 text-sm text-slate-500">
+                        <p className="mb-2 text-sm text-slate-500 dark:text-slate-400">
                           Team: {game.team || "Unknown"}
                         </p>
 
@@ -540,7 +567,7 @@ export default function AdminPage() {
                             {game.genres.map((genre) => (
                               <span
                                 key={genre}
-                                className="rounded-full bg-sky-100 px-3 py-1 text-xs font-medium text-blue-700"
+                                className="rounded-full bg-sky-100 px-3 py-1 text-xs font-medium text-blue-700 dark:bg-slate-800 dark:text-sky-300"
                               >
                                 {genre}
                               </span>
@@ -548,18 +575,18 @@ export default function AdminPage() {
                           </div>
                         ) : null}
 
-                        <p className="text-sm leading-7 text-slate-600">
+                        <p className="text-sm leading-7 text-slate-600 dark:text-slate-400">
                           {game.description || "No description"}
                         </p>
 
                         {game.itchUrl ? (
-                          <p className="mt-3 text-sm text-slate-600">
+                          <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">
                             Game link:{" "}
                             <a
                               href={game.itchUrl}
                               target="_blank"
                               rel="noreferrer"
-                              className="break-all text-blue-600 hover:text-blue-700"
+                              className="break-all text-blue-600 hover:text-blue-700 dark:text-sky-300 dark:hover:text-sky-200"
                             >
                               {game.itchUrl}
                             </a>
@@ -570,7 +597,7 @@ export default function AdminPage() {
                       <div className="flex flex-wrap gap-3 md:flex-col">
                         <button
                           onClick={() => startEdit(game)}
-                          className="rounded-full bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700"
+                          className="rounded-full bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700 dark:bg-sky-500 dark:text-slate-950 dark:hover:bg-sky-400"
                         >
                           Edit
                         </button>

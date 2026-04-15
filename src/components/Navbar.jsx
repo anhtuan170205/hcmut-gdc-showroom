@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { HiBars3BottomRight } from "react-icons/hi2";
 import { CgClose } from "react-icons/cg";
+import { Moon, Sun } from "lucide-react";
 
 const navLinks = [
   { id: 1, label: "Games", to: "/" },
@@ -9,7 +10,7 @@ const navLinks = [
   { id: 3, label: "Admin", to: "/admin" },
 ];
 
-export default function Navbar() {
+export default function Navbar({ theme, toggleTheme }) {
   const [showNav, setShowNav] = useState(false);
   const [navBg, setNavBg] = useState(false);
 
@@ -26,14 +27,14 @@ export default function Navbar() {
     `rounded-lg px-4 py-2 text-sm font-medium transition ${
       isActive
         ? "bg-blue-600 text-white"
-        : "text-slate-700 hover:bg-white hover:text-blue-700"
+        : "text-slate-700 hover:bg-white hover:text-blue-700 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-sky-300"
     }`;
 
   const mobileLinkClass = ({ isActive }) =>
     `w-fit border-b pb-1 text-2xl font-medium transition sm:text-3xl ${
       isActive
-        ? "border-blue-500 text-blue-600"
-        : "border-sky-200 text-slate-700 hover:text-blue-700"
+        ? "border-blue-500 text-blue-600 dark:border-sky-400 dark:text-sky-300"
+        : "border-sky-200 text-slate-700 hover:text-blue-700 dark:border-slate-700 dark:text-slate-200 dark:hover:text-sky-300"
     }`;
 
   return (
@@ -41,13 +42,13 @@ export default function Navbar() {
       <header
         className={`fixed top-0 z-50 w-full transition-all duration-300 ${
           navBg
-            ? "border-b border-sky-200 bg-sky-100/95 shadow-sm backdrop-blur"
-            : "bg-sky-100/90 backdrop-blur"
+            ? "border-b border-sky-200 bg-sky-100/95 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-900/95"
+            : "bg-sky-100/90 backdrop-blur dark:bg-slate-900/90"
         }`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-8">
           <Link to="/" className="flex items-center gap-3">
-            <div className="rounded-xl bg-white p-2 shadow-sm">
+            <div className="rounded-xl bg-white p-2 shadow-sm dark:bg-slate-800">
               <img
                 src="/logo.jpg"
                 alt="GameDev Club logo"
@@ -56,35 +57,63 @@ export default function Navbar() {
             </div>
 
             <div>
-              <div className="pixel-font text-[10px] leading-4 text-slate-900 md:text-xs">
+              <div className="pixel-font text-[10px] leading-4 text-slate-900 md:text-xs dark:text-slate-100">
                 HCMUT GameDev Club
               </div>
-              <div className="text-xs text-slate-600">
+              <div className="text-xs text-slate-600 dark:text-slate-400">
                 Student Game Showcase
               </div>
             </div>
           </Link>
 
-          <nav className="hidden items-center gap-2 lg:flex">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.id}
-                to={link.to}
-                end={link.to === "/"}
-                className={desktopLinkClass}
-              >
-                {link.label}
-              </NavLink>
-            ))}
-          </nav>
+          <div className="hidden items-center gap-2 lg:flex">
+            <nav className="flex items-center gap-2">
+              {navLinks.map((link) => (
+                <NavLink
+                  key={link.id}
+                  to={link.to}
+                  end={link.to === "/"}
+                  className={desktopLinkClass}
+                >
+                  {link.label}
+                </NavLink>
+              ))}
+            </nav>
 
-          <button
-            onClick={() => setShowNav(true)}
-            className="lg:hidden"
-            aria-label="Open navigation"
-          >
-            <HiBars3BottomRight className="h-8 w-8 cursor-pointer text-slate-900" />
-          </button>
+            <button
+              onClick={toggleTheme}
+              className="rounded-lg border border-sky-200 bg-white p-2 text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
+            </button>
+          </div>
+
+          <div className="flex items-center gap-2 lg:hidden">
+            <button
+              onClick={toggleTheme}
+              className="rounded-lg border border-sky-200 bg-white p-2 text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
+            </button>
+
+            <button
+              onClick={() => setShowNav(true)}
+              className="lg:hidden"
+              aria-label="Open navigation"
+            >
+              <HiBars3BottomRight className="h-8 w-8 cursor-pointer text-slate-900 dark:text-slate-100" />
+            </button>
+          </div>
         </div>
       </header>
 
@@ -98,7 +127,7 @@ export default function Navbar() {
       />
 
       <div
-        className={`fixed right-0 top-0 z-70 flex h-full w-[85%] max-w-90 flex-col justify-center space-y-6 border-l border-sky-200 bg-sky-50 px-8 text-slate-900 shadow-xl transition-all duration-500 sm:w-[60%] ${
+        className={`fixed right-0 top-0 z-70 flex h-full w-[85%] max-w-90 flex-col justify-center space-y-6 border-l border-sky-200 bg-sky-50 px-8 text-slate-900 shadow-xl transition-all duration-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 sm:w-[60%] ${
           showNav ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -116,7 +145,7 @@ export default function Navbar() {
 
         <CgClose
           onClick={() => setShowNav(false)}
-          className="absolute right-5 top-5 h-7 w-7 cursor-pointer"
+          className="absolute right-5 top-5 h-7 w-7 cursor-pointer text-slate-700 hover:text-blue-700 dark:text-slate-300 dark:hover:text-sky-300"
         />
       </div>
     </>
