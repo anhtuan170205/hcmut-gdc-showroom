@@ -5,7 +5,6 @@ import GamesPage from "./pages/GamesPage";
 import SubmitPage from "./pages/SubmitPage";
 import AdminPage from "./pages/AdminPage";
 import { getGames } from "./services/games";
-import { mockGames } from "./data/mockGames";
 import Footer from "./components/Footer";
 
 function HomePage() {

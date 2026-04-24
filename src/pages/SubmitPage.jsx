@@ -8,7 +8,10 @@ const initialFormData = {
   genres: [],
   description: "",
   buildLink: "",
+  imageFile: null,
 };
+
+const IMGBB_API_KEY = import.meta.env.VITE_IMGBB_API_KEY || "";
 
 function withTimeout(promise, ms = 8000) {
   return Promise.race([
@@ -19,13 +22,46 @@ function withTimeout(promise, ms = 8000) {
   ]);
 }
 
+async function uploadImageToImgBB(file) {
+  if (!IMGBB_API_KEY) {
+    throw new Error("Missing ImgBB API key. Add VITE_IMGBB_API_KEY to .env");
+  }
+
+  const imageData = new FormData();
+  imageData.append("image", file);
+
+  const response = await fetch(
+    `https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`,
+    {
+      method: "POST",
+      body: imageData,
+    }
+  );
+
+  const result = await response.json();
+
+  if (!response.ok || !result.success) {
+    throw new Error(result?.error?.message || "Failed to upload image.");
+  }
+
+  return result.data.url;
+}
+
 export default function SubmitPage() {
   const [formData, setFormData] = useState(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, files } = e.target;
+
+    if (name === "imageFile") {
+      setFormData((prev) => ({
+        ...prev,
+        imageFile: files?.[0] || null,
+      }));
+      return;
+    }
 
     setFormData((prev) => ({
       ...prev,
@@ -48,24 +84,35 @@ export default function SubmitPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     setIsSubmitting(true);
     setMessage("");
 
     try {
+      let imageUrl = "";
+
+      if (formData.imageFile) {
+        imageUrl = await withTimeout(
+          uploadImageToImgBB(formData.imageFile),
+          15000
+        );
+      }
+
       await withTimeout(
         createSubmission({
-          title: formData.gameTitle,
-          team: formData.teamName,
+          title: formData.gameTitle.trim(),
+          team: formData.teamName.trim(),
           genres: formData.genres,
-          description: formData.description,
-          itchUrl: formData.buildLink,
+          description: formData.description.trim(),
+          itchUrl: formData.buildLink.trim(),
+          image: imageUrl,
           platforms: ["Windows"],
-          featured: false,
         }),
         8000
       );
 
       setFormData(initialFormData);
+      e.target.reset();
       setMessage("Game submitted for review.");
     } catch (error) {
       console.error("submit failed", error);
@@ -182,6 +229,26 @@ export default function SubmitPage() {
                   className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-500"
                   required
                 />
+              </div>
+
+              <div className="space-y-2">
+                <label
+                  htmlFor="imageFile"
+                  className="text-sm font-medium text-slate-700 dark:text-slate-300"
+                >
+                  Game Cover Image
+                </label>
+                <input
+                  id="imageFile"
+                  name="imageFile"
+                  type="file"
+                  accept="image/png,image/jpeg,image/jpg,image/webp"
+                  onChange={handleChange}
+                  className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 file:mr-4 file:rounded-full file:border-0 file:bg-blue-600 file:px-4 file:py-2 file:text-sm file:font-medium file:text-white dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:file:bg-sky-500 dark:file:text-slate-950"
+                />
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  PNG, JPG, or WebP. Max size: 5MB. This image will be used as the cover for your game on the showroom.
+                </p>
               </div>
 
               <div className="space-y-2">

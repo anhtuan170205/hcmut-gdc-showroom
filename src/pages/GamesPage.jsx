@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import GameCard from "../components/GameCard";
 import { genreOptions } from "../data/genres";
-import { getGameImagePath } from "../utils/gameHelpers";
 
 export default function GamesPage({
   games = [],
@@ -16,6 +15,7 @@ export default function GamesPage({
 
   const filteredGames = useMemo(() => {
     if (selectedGenre === "All") return games;
+
     return games.filter((game) => game.genres?.includes(selectedGenre));
   }, [games, selectedGenre]);
 
@@ -53,6 +53,7 @@ export default function GamesPage({
             return (
               <button
                 key={genre}
+                type="button"
                 onClick={() => setSelectedGenre(genre)}
                 className={`rounded-full px-4 py-2 text-sm font-medium transition ${
                   isActive
@@ -79,7 +80,7 @@ export default function GamesPage({
                 team={game.team}
                 genres={game.genres || []}
                 description={game.description}
-                image={getGameImagePath(game)}
+                image={game.image}
                 itchUrl={game.itchUrl}
               />
             ))}

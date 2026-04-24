@@ -10,7 +10,13 @@ import { db } from "../lib/firebase";
 
 export async function createGame(game) {
   const docRef = await addDoc(collection(db, "games"), {
-    ...game,
+    title: game.title || "",
+    team: game.team || "",
+    genres: game.genres || [],
+    description: game.description || "",
+    itchUrl: game.itchUrl || "",
+    image: game.image || "",
+    platforms: game.platforms || ["Windows"],
     createdAt: Date.now(),
   });
 
@@ -19,16 +25,20 @@ export async function createGame(game) {
 
 export async function getGames() {
   const snapshot = await getDocs(collection(db, "games"));
+
   return snapshot.docs.map((docItem) => ({
     id: docItem.id,
     ...docItem.data(),
   }));
 }
 
-export async function updateGame(id, updatedData) {
-  await updateDoc(doc(db, "games", id), updatedData);
+export async function updateGame(gameId, game) {
+  await updateDoc(doc(db, "games", gameId), {
+    ...game,
+    updatedAt: Date.now(),
+  });
 }
 
-export async function deleteGame(id) {
-  await deleteDoc(doc(db, "games", id));
+export async function deleteGame(gameId) {
+  await deleteDoc(doc(db, "games", gameId));
 }
