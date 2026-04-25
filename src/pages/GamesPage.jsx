@@ -14,9 +14,18 @@ export default function GamesPage({
   }, []);
 
   const filteredGames = useMemo(() => {
-    if (selectedGenre === "All") return games;
+    const sortedGames = [...games].sort((a, b) => {
+      const orderA = a.displayOrder ?? 999999;
+      const orderB = b.displayOrder ?? 999999;
 
-    return games.filter((game) => game.genres?.includes(selectedGenre));
+      if (orderA !== orderB) return orderA - orderB;
+
+      return (b.createdAt || 0) - (a.createdAt || 0);
+    });
+
+    if (selectedGenre === "All") return sortedGames;
+
+    return sortedGames.filter((game) => game.genres?.includes(selectedGenre));
   }, [games, selectedGenre]);
 
   return (
